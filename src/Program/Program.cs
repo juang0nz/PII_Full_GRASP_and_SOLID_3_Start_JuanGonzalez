@@ -4,6 +4,13 @@
 // </copyright>
 //-------------------------------------------------------------------------
 
+
+//¿Qué patrón o principio usan para asignar esta responsabilidad? Escriban la respuesta en comentarios en el código
+
+//Aplico Polymorfismo, se define una interfaz IPrinter y dos clases que la implementan ConsolePrinter y FilePrinter, ya que el codigo que varia deberia
+//estar en diferentes clases con una operación polimorfica. Inicialmente la clase AllInOnePrinter imprimia en consola o archivo de texto segun el tipo
+//de Destination, con un bloque para cada destino de impresion. 
+
 using System;
 using System.Collections;
 using System.Linq;
@@ -26,9 +33,12 @@ namespace Full_GRASP_And_SOLID
             recipe.AddStep(new Step(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120));
             recipe.AddStep(new Step(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60));
 
-            AllInOnePrinter printer = new AllInOnePrinter();
-            printer.PrintRecipe(recipe, Destination.Console);
-            printer.PrintRecipe(recipe, Destination.File);
+            IPrinter printer;
+            printer = new ConsolePrinter();
+            printer.PrintTicket(recipe);
+            printer = new FilePrinter();
+            printer.PrintTicket(recipe);
+
         }
 
         private static void PopulateCatalogs()
